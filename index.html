@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linked-List-DSA: Exploration</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Utility classes for dynamic theming */
+        /* --- Light Theme (Default) --- */
+        .bg-primary { background-color: #ffffff; }
+        .text-primary { color: #1f2937; } /* Dark Gray */
+        .bg-accent { background-color: #3b82f6; } /* Blue */
+        .text-accent { color: #ffffff; }
+        .border-theme { border-color: #e5e7eb; } /* Light Gray Border */
+
+        /* --- Dark Theme --- */
+        .dark .bg-primary { background-color: #1f2937; } /* Gray 800 */
+        .dark .text-primary { color: #f3f4f6; } /* Gray 100 */
+        .dark .bg-accent { background-color: #10b981; } /* Emerald */
+        .dark .text-accent { color: #1f2937; }
+        .dark .border-theme { border-color: #374151; } /* Gray 700 Border */
+        .dark .shadow-theme { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5); }
+
+        /* --- Red Theme --- */
+        .red .bg-primary { background-color: #fee2e2; } /* Red 100 */
+        .red .text-primary { color: #991b1b; } /* Red 800 */
+        .red .bg-accent { background-color: #ef4444; } /* Red 500 */
+        .red .text-accent { color: #ffffff; }
+        .red .border-theme { border-color: #fca5a5; } /* Red 300 Border */
+        .red .shadow-theme { box-shadow: 0 4px 6px -1px rgba(153, 27, 27, 0.2), 0 2px 4px -2px rgba(153, 27, 27, 0.1); }
+        
+        /* Apply default theme classes to body for initial load */
+        .light {
+            background-color: #f3f4f6; /* Tailwind gray-100 */
+            color: #1f2937; /* Tailwind gray-800 */
+        }
+    </style>
+</head>
+<body class="light">
+
+    <!-- Navbar/Header (Sticky) -->
+    <header class="sticky top-0 z-50 shadow-md bg-primary text-primary transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center flex-wrap gap-4">
+            <!-- Title/Logo -->
+            <h1 class="text-xl font-bold md:text-2xl flex-shrink-0">
+                <span class="bg-accent text-accent px-2 py-1 rounded-md mr-1">LL</span>
+                <span class="hidden sm:inline">Linked-List-DSA</span>
+                <span class="sm:hidden">DSA</span>
+            </h1>
+
+            <!-- Search Bar -->
+            <div class="flex-grow max-w-lg order-3 md:order-2 w-full md:w-auto">
+                <div class="relative">
+                    <input type="text" placeholder="Search resources or concepts..." 
+                           class="w-full pl-10 pr-4 py-2 border-2 border-theme rounded-lg bg-primary focus:outline-none focus:ring-2 focus:ring-accent transition-all text-primary text-sm shadow-inner"
+                           aria-label="Search">
+                    <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Theme Switcher & Live Demo Link -->
+            <div class="flex items-center space-x-4 order-2 md:order-3">
+                <button id="theme-toggle" 
+                        class="p-2 rounded-full bg-primary hover:bg-gray-200 transition-colors duration-200 text-primary border-2 border-theme"
+                        aria-label="Toggle Theme">
+                    <i data-lucide="sun-moon" class="h-6 w-6"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 transition-colors duration-300">
+        
+        <!-- Welcome Section -->
+        <div class="bg-primary p-6 md:p-10 rounded-xl shadow-lg border-theme border-2 mb-12 shadow-theme">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-accent">
+                Linked-List-DSA
+            </h2>
+            <p class="text-lg text-primary/80 leading-relaxed">
+                Welcome to the Linked-List-DSA repository! This project is a hands-on exploration of the Linked List, one of the most fundamental and versatile data structures in computer science. Dive in to understand its structure, operations, and key differences from traditional arrays.
+            </p>
+        </div>
+
+        <!-- Live Demo Card -->
+        <div class="mb-12">
+            <div class="p-5 md:p-8 bg-accent rounded-xl shadow-xl flex flex-col sm:flex-row items-center justify-between transition-all duration-300">
+                <h3 class="text-2xl font-bold text-accent mb-4 sm:mb-0">
+                    🚀 Live Demo
+                </h3>
+                <a href="#" class="inline-flex items-center justify-center px-6 py-3 border-2 border-accent text-accent font-semibold rounded-lg shadow-md 
+                                  bg-white hover:bg-gray-50 transition-all duration-300 transform hover:scale-105">
+                    ➡️ LIVE SERVER DEMO
+                </a>
+            </div>
+        </div>
+
+        <!-- Content Cards Container -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- What is a Linked List? -->
+            <div class="lg:col-span-2 bg-primary p-6 rounded-xl shadow-md border-theme border shadow-theme">
+                <h3 class="text-3xl font-bold mb-4 border-b border-theme pb-2 text-primary">🧐 What is a Linked List?</h3>
+                <p class="mb-4 text-primary/90">
+                    A Linked List is a linear data structure where elements are not stored at contiguous memory locations (unlike an array). Instead, elements are scattered throughout memory and linked together using pointers.
+                </p>
+                <p class="mb-6 text-primary/90">
+                    This unique structure offers significant advantages in terms of dynamic memory allocation and efficient insertions/deletions compared to arrays.
+                </p>
+            </div>
+
+            <!-- The Node Structure & Visualization -->
+            <div class="lg:col-span-1 bg-primary p-6 rounded-xl shadow-md border-theme border shadow-theme">
+                <h3 class="text-3xl font-bold mb-4 border-b border-theme pb-2 text-primary">🧱 The Node Structure</h3>
+                <p class="mb-4 text-primary/90">
+                    The basic building block of a linked list is the **Node**. Each node typically consists of two primary components:
+                </p>
+                <ol class="list-decimal list-inside space-y-2 ml-4 text-primary/90">
+                    <li>
+                        <strong>Data (or Value):</strong> The actual information or value being stored in the list.
+                    </li>
+                    <li>
+                        <strong>Next Pointer (or Reference):</strong> A crucial link that stores the memory address of the next node in the sequence. For the very last node, this pointer is set to NULL (or None) to signify the end of the list.
+                    </li>
+                </ol>
+                <div class="mt-6 p-4 rounded-lg bg-gray-100 dark:bg-gray-700 red:bg-red-200 border-theme border">
+                    <h4 class="font-semibold text-lg mb-2 text-primary">🖼️ Visualizing the Link</h4>
+                    <p class="text-sm text-primary/90">
+                        Imagine a chain where each link holds a piece of data and also knows the exact location of the next link. This "knowing where the next link is" is the function of the Next Pointer.
+                    </p>
+                    <p class="text-center font-mono text-sm mt-3 text-gray-600 dark:text-gray-300 red:text-red-700">
+                        
+                    </p>
+                </div>
+            </div>
+
+            <!-- Key Concepts Table -->
+            <div class="lg:col-span-3 bg-primary p-6 rounded-xl shadow-md border-theme border shadow-theme">
+                <h3 class="text-3xl font-bold mb-6 border-b border-theme pb-2 text-primary">🔑 Key Concepts & Types</h3>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-theme rounded-xl overflow-hidden">
+                        <thead class="bg-gray-50 dark:bg-gray-700 red:bg-red-200">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-primary">Concept</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-primary">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-theme">
+                            <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-700/50 red:hover:bg-red-100/50">
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-primary">Head</td>
+                                <td class="px-6 py-4 text-primary/90">A reference/pointer to the first node in the list. This is the entry point for all operations.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-700/50 red:hover:bg-red-100/50">
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-primary">Tail</td>
+                                <td class="px-6 py-4 text-primary/90">The last node in the list, identifiable because its Next Pointer is NULL.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-700/50 red:hover:bg-red-100/50">
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-primary">Singly Linked List</td>
+                                <td class="px-6 py-4 text-primary/90">Nodes only have a pointer to the next node. Traversal is one-directional (forward).</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-700/50 red:hover:bg-red-100/50">
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-primary">Doubly Linked List</td>
+                                <td class="px-6 py-4 text-primary/90">Nodes have two pointers: one to the next node and one to the previous node. Traversal is bi-directional.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-700/50 red:hover:bg-red-100/50">
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-primary">Circular Linked List</td>
+                                <td class="px-6 py-4 text-primary/90">The pointer of the last node points back to the first node (Head), forming a loop.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Resources -->
+            <div class="lg:col-span-3 bg-primary p-6 rounded-xl shadow-md border-theme border shadow-theme">
+                <h3 class="text-3xl font-bold mb-4 border-b border-theme pb-2 text-primary">📚 Resources & Documentation</h3>
+                <p class="mb-4 text-primary/90">
+                    Explore the source code, detailed explanations, and visual aids used in this project:
+                </p>
+                <ul class="space-y-3">
+                    <li>
+                        <a href="#" class="flex items-center text-accent hover:text-accent/80 transition-colors font-medium">
+                            <i data-lucide="file-text" class="h-5 w-5 mr-2"></i>
+                            Presentation Slides: Linked Lists.pptx
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center text-accent hover:text-accent/80 transition-colors font-medium">
+                            <i data-lucide="notebook-pen" class="h-5 w-5 mr-2"></i>
+                            NotebookLM Integration: Access supplementary notes and context on Google NotebookLM here.
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="mt-12 py-6 bg-primary border-t border-theme text-center text-sm text-primary/60 transition-colors duration-300">
+        <p>&copy; 2025 Linked-List-DSA Exploration. All rights reserved.</p>
+    </footer>
+
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // --- Theme Switching Logic ---
+        
+        const THEMES = ['light', 'dark', 'red'];
+        let currentThemeIndex = 0;
+        
+        const body = document.body;
+        const themeToggle = document.getElementById('theme-toggle');
+
+        // Function to update the theme icon
+        function updateThemeIcon(theme) {
+            let iconName = 'sun-moon';
+            if (theme === 'dark') {
+                iconName = 'moon';
+            } else if (theme === 'red') {
+                iconName = 'heart'; 
+            }
+            // Temporarily replace the icon to force update
+            themeToggle.innerHTML = `<i data-lucide="${iconName}" class="h-6 w-6"></i>`;
+            lucide.createIcons();
+        }
+
+        // Function to apply the current theme
+        function applyTheme(theme) {
+            // Remove all possible theme classes
+            THEMES.forEach(t => body.classList.remove(t));
+            
+            // Add the new theme class
+            body.classList.add(theme);
+
+            // Update icon
+            updateThemeIcon(theme);
+
+            // Save the theme preference (optional, for persistence across loads)
+            localStorage.setItem('dsaTheme', theme);
+        }
+
+        // Function to cycle themes
+        function cycleTheme() {
+            currentThemeIndex = (currentThemeIndex + 1) % THEMES.length;
+            const nextTheme = THEMES[currentThemeIndex];
+            applyTheme(nextTheme);
+        }
+
+        // Load saved theme or default to light
+        const savedTheme = localStorage.getItem('dsaTheme');
+        if (savedTheme && THEMES.includes(savedTheme)) {
+            currentThemeIndex = THEMES.indexOf(savedTheme);
+            applyTheme(savedTheme);
+        } else {
+            applyTheme(THEMES[currentThemeIndex]);
+        }
+
+        // Add event listener to the toggle button
+        themeToggle.addEventListener('click', cycleTheme);
+    </script>
+</body>
+</html>
